@@ -1644,7 +1644,7 @@ public class Home extends javax.swing.JFrame {
         // TODO add your handling code here:
         String file_name = title+" -- output.txt";
         File selectedFile = null;
-        try {
+        try {   /*
                 jFileChooserGenerate.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
                 result = jFileChooserGenerate.showOpenDialog(this);
                 if ( result == JFileChooser.APPROVE_OPTION) {
@@ -1655,6 +1655,7 @@ public class Home extends javax.swing.JFrame {
                 } else {
                     jLabelLokasiFile.setText("Location to save file :");
                }
+            */
                 
                 FileWriter fstream = new FileWriter(selectedFile.getAbsolutePath()+file_name);
                 BufferedWriter out = new BufferedWriter(fstream);
@@ -1670,6 +1671,7 @@ public class Home extends javax.swing.JFrame {
                 }
                 out.close();
                 //System.out.println("File created successfully.");
+                jLabelLokasiFile.setText("File berhasil di simpan di folder Project Netbeans");
                 JOptionPane.showMessageDialog(this, "File telah berhasil disimpan!","Sukses!", JOptionPane.INFORMATION_MESSAGE);
 
         } catch (Exception e) {
