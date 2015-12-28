@@ -1606,7 +1606,8 @@ public class Home extends javax.swing.JFrame {
         Collections.shuffle(soalExport);
         model.setRowCount(0);
         int no = 1;
-        for (int j = 0; j < soalExport.size(); j++) {
+        int jumlah = Integer.parseInt(jTextFieldGenerateJumlahSoal.getText());
+        for (int j = 0; j < jumlah; j++) {
             String nomor = String.valueOf(no);
             String [] isibaris = {nomor, listSoal.get(j).getMatkul(), listSoal.get(j).getPokbas(),
                     listSoal.get(j).getPertanyaan(),
