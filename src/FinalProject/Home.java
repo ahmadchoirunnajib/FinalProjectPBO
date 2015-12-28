@@ -1603,24 +1603,63 @@ public class Home extends javax.swing.JFrame {
     private void btnGenerateSoalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGenerateSoalActionPerformed
         // TODO add your handling code here:
         //WriteToFile(soalExport);
-        Collections.shuffle(soalExport);
-        model.setRowCount(0);
-        int no = 1;
-        int jumlah = Integer.parseInt(jTextFieldGenerateJumlahSoal.getText());
-        for (int j = 0; j < jumlah; j++) {
-            String nomor = String.valueOf(no);
-            String [] isibaris = {nomor, listSoal.get(j).getMatkul(), listSoal.get(j).getPokbas(),
+        
+        if (listSoal.isEmpty() == true) {
+            JOptionPane.showMessageDialog(this, "Tidak ada data!","Peringatan", JOptionPane.WARNING_MESSAGE);
+        } else {
+            model.setRowCount(0);
+            Object cbMatkulTerpilih =  cbMatkulGenerate.getSelectedItem();
+            Object cbPokokBahasanTerpilih =  cbPokokBahasanGenerate.getSelectedItem();
+            String strcbMatkulTerpilih = cbMatkulTerpilih.toString();
+            String strcbPokokBahasanTerpilih = cbPokokBahasanTerpilih.toString();
+            
+            int no = 1;
+            for (int j = 0; j < listSoal.size(); j++) {
+                String nomor = String.valueOf(no);
+                if (strcbMatkulTerpilih.equals(listSoal.get(j).getMatkul()) 
+                        && listSoal.get(j).getPokbas().equals(strcbPokokBahasanTerpilih) ) {
+                    soalExport = new LinkedList<Pertanyaan>();
+                    soalExport.add(new Pertanyaan(listSoal.get(j).getMatkul(), listSoal.get(j).getPokbas(),
                     listSoal.get(j).getPertanyaan(),
-                    listSoal.get(j).getJawabanD(), String.valueOf(listSoal.get(j).isD()),
-                    listSoal.get(j).getJawabanC(), String.valueOf(listSoal.get(j).isC()),
-                    listSoal.get(j).getJawabanB(), String.valueOf(listSoal.get(j).isB()),
-                    listSoal.get(j).getJawabanA(), String.valueOf(listSoal.get(j).isA()),
-                    listSoal.get(j).getJawabanE(), String.valueOf(listSoal.get(j).isE())};
-            model.addRow(isibaris);
-            control = new int[jTableDaftarSoal.getRowCount()];
-            control[j] = j;
-            no++;
-        }        
+                    listSoal.get(j).getJawabanA(), listSoal.get(j).isA(),
+                    listSoal.get(j).getJawabanB(), listSoal.get(j).isB(),
+                    listSoal.get(j).getJawabanC(), listSoal.get(j).isC(),
+                    listSoal.get(j).getJawabanD(), listSoal.get(j).isD(),
+                    listSoal.get(j).getJawabanE(), listSoal.get(j).isE()));
+                }
+                    
+            }
+            
+                    Collections.shuffle(soalExport);
+                    controlmodel = 2;
+                    int jumlah = Integer.parseInt(jTextFieldGenerateJumlahSoal.getText());
+                    System.out.println(jumlah);
+                    for (int n = 0; n < soalExport.size(); n++) {
+                        String nomorr = String.valueOf(no);
+                        String [] isibariss = {nomorr, soalExport.get(n).getMatkul(), soalExport.get(n).getPokbas(),
+                        soalExport.get(n).getPertanyaan(),
+                        soalExport.get(n).getJawabanD(), String.valueOf(soalExport.get(n).isD()),
+                        soalExport.get(n).getJawabanC(), String.valueOf(soalExport.get(n).isC()),
+                        soalExport.get(n).getJawabanB(), String.valueOf(soalExport.get(n).isB()),
+                        soalExport.get(n).getJawabanA(), String.valueOf(soalExport.get(n).isA()),
+                        soalExport.get(n).getJawabanE(), String.valueOf(soalExport.get(n).isE())};
+                        model.addRow(isibariss);
+                        System.out.println("jumlah row = "+jTableGenerate.getRowCount());
+                        System.out.println("jumlah ukuran soalExport = "+soalExport.size());
+                        if (jTableGenerate.getRowCount() == soalExport.size()) {
+                            int tampil = soalExport.size() - jumlah;
+                            for (int k = 0; k < tampil; k++) {
+                                 model.removeRow(k);
+                            }
+                        }
+                        
+                        control = new int[jTableGenerate.getRowCount()];
+                        control[n] = n;
+                        no++;
+                    }
+            
+            
+        }
         
     }//GEN-LAST:event_btnGenerateSoalActionPerformed
 
@@ -1643,7 +1682,7 @@ public class Home extends javax.swing.JFrame {
     int result;
     private void btnGenerateSoalExportActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGenerateSoalExportActionPerformed
         // TODO add your handling code here:
-        String file_name = title+" -- output.txt";
+        String file_name = title+" - Export.txt";
         File selectedFile = null;
         try {   /*
                 jFileChooserGenerate.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
@@ -1658,7 +1697,7 @@ public class Home extends javax.swing.JFrame {
                }
             */
                 
-                FileWriter fstream = new FileWriter(selectedFile.getAbsolutePath()+file_name);
+                FileWriter fstream = new FileWriter(file_name);
                 BufferedWriter out = new BufferedWriter(fstream);
                 for (int j = 0; j < soalExport.size(); j++) {
                     String isibaris = listSoal.get(j).getMatkul() +","+ listSoal.get(j).getPokbas()+","+
@@ -1695,6 +1734,7 @@ public class Home extends javax.swing.JFrame {
         if (listSoal.isEmpty() == true) {
             JOptionPane.showMessageDialog(this, "Tidak ada data!","Peringatan", JOptionPane.WARNING_MESSAGE);
         } else {
+            controlmodel = 1;
             model.setRowCount(0);
             Object cbMatkulTerpilih =  cbMatkulGenerate.getSelectedItem();
             Object cbPokokBahasanTerpilih =  cbPokokBahasanGenerate.getSelectedItem();
@@ -1719,6 +1759,7 @@ public class Home extends javax.swing.JFrame {
                         control[k] = j;
                     }
                     no++;
+                    
                     soalExport = new LinkedList<Pertanyaan>();
                     soalExport.add(new Pertanyaan(listSoal.get(j).getMatkul(), listSoal.get(j).getPokbas(),
                     listSoal.get(j).getPertanyaan(),
@@ -1883,6 +1924,7 @@ public class Home extends javax.swing.JFrame {
     
     DefaultTableModel model;
     int[] control;
+    int controlmodel;
     private void setPropertiTabel() {
         String [] kolom = {"No", "Mata Kuliah", "Pokok Bahasan", "Pertanyaan",
             "Jawaban A", "A","Jawaban B", "B", "Jawaban C", "C", "Jawaban D", "D", "Jawaban E", "E"};
@@ -1902,24 +1944,42 @@ public class Home extends javax.swing.JFrame {
               //System.out.println("row terpilih adalah : "+row);
               //System.out.println("nilai row terpilih adalah : "+control[row]);
             //int column = target.getSelectedColumn();
-              
-                  jTextFieldDetailSoalMataKuliah.setText(listSoal.get(control[row]).getMatkul());
-                  jTextFieldDetailSoalPokokBahasan.setText(listSoal.get(control[row]).getMatkul());
-                  jTextAreaDetailSoalSoal.setText(listSoal.get(control[row]).getPertanyaan());
-                  if(listSoal.get(control[row]).isA() == false && listSoal.get(control[row]).isB() == false
-                          && listSoal.get(control[row]).isC() == false && listSoal.get(control[row]).isD() == false
-                          && listSoal.get(control[row]).isE() == false) {
-                      jTextAreaDetailSoalJawaban.setText("Tidak ada jawaban untuk soal ini");
-                  } else {
-                    jTextAreaDetailSoalJawaban.setText(
-                            listSoal.get(control[row]).getJawabanA()+"\t\t"+listSoal.get(control[row]).isA()+"\n"+
-                            listSoal.get(control[row]).getJawabanB()+"\t\t"+listSoal.get(control[row]).isB()+"\n"+
-                            listSoal.get(control[row]).getJawabanC()+"\t\t"+listSoal.get(control[row]).isC()+"\n"+
-                            listSoal.get(control[row]).getJawabanD()+"\t\t"+listSoal.get(control[row]).isD()+"\n"+
-                            listSoal.get(control[row]).getJawabanE()+"\t\t"+listSoal.get(control[row]).isE()
-                    );
+                  if (controlmodel == 1) {
+                    jTextFieldDetailSoalMataKuliah.setText(listSoal.get(control[row]).getMatkul());
+                    jTextFieldDetailSoalPokokBahasan.setText(listSoal.get(control[row]).getMatkul());
+                    jTextAreaDetailSoalSoal.setText(listSoal.get(control[row]).getPertanyaan());
+                    if(listSoal.get(control[row]).isA() == false && listSoal.get(control[row]).isB() == false
+                            && listSoal.get(control[row]).isC() == false && listSoal.get(control[row]).isD() == false
+                            && listSoal.get(control[row]).isE() == false) {
+                        jTextAreaDetailSoalJawaban.setText("Tidak ada jawaban untuk soal ini");
+                    } else {
+                      jTextAreaDetailSoalJawaban.setText(
+                              "A. "+listSoal.get(control[row]).isA()+"\n"+listSoal.get(control[row]).getJawabanA()+"\n"+
+                              "B. "+listSoal.get(control[row]).isB()+"\n"+listSoal.get(control[row]).getJawabanB()+"\n"+
+                              "C. "+listSoal.get(control[row]).isC()+"\n"+listSoal.get(control[row]).getJawabanC()+"\n"+
+                              "D. "+listSoal.get(control[row]).isD()+"\n"+listSoal.get(control[row]).getJawabanD()+"\n"+
+                              "E. "+listSoal.get(control[row]).isE()+"\n"+listSoal.get(control[row]).getJawabanE()+"\n"
+                      );
+                    }
+                  } else if(controlmodel == 2) {
+                    jTextFieldDetailSoalMataKuliah.setText(soalExport.get(control[row]).getMatkul());
+                    jTextFieldDetailSoalPokokBahasan.setText(soalExport.get(control[row]).getMatkul());
+                    jTextAreaDetailSoalSoal.setText(soalExport.get(control[row]).getPertanyaan());
+                    if(soalExport.get(control[row]).isA() == false && soalExport.get(control[row]).isB() == false
+                            && soalExport.get(control[row]).isC() == false && soalExport.get(control[row]).isD() == false
+                            && soalExport.get(control[row]).isE() == false) {
+                        jTextAreaDetailSoalJawaban.setText("Tidak ada jawaban untuk soal ini");
+                    } else {
+                      jTextAreaDetailSoalJawaban.setText(
+                              "A. "+soalExport.get(control[row]).isA()+"\n"+soalExport.get(control[row]).getJawabanA()+"\n"+
+                              "B. "+soalExport.get(control[row]).isB()+"\n"+soalExport.get(control[row]).getJawabanB()+"\n"+
+                              "C. "+soalExport.get(control[row]).isC()+"\n"+soalExport.get(control[row]).getJawabanC()+"\n"+
+                              "D. "+soalExport.get(control[row]).isD()+"\n"+soalExport.get(control[row]).getJawabanD()+"\n"+
+                              "E. "+soalExport.get(control[row]).isE()+"\n"+soalExport.get(control[row]).getJawabanE()+"\n"
+                      );
+                    }  
                   }
-                       
+            jFrameDetailSoal.setTitle("Detail Soal");
             jFrameDetailSoal.setLocationRelativeTo(null);
             jFrameDetailSoal.show();
              
