@@ -1611,10 +1611,10 @@ public class Home extends javax.swing.JFrame {
             String nomor = String.valueOf(no);
             String [] isibaris = {nomor, listSoal.get(j).getMatkul(), listSoal.get(j).getPokbas(),
                     listSoal.get(j).getPertanyaan(),
-                    listSoal.get(j).getJawabanA(), String.valueOf(listSoal.get(j).isA()),
-                    listSoal.get(j).getJawabanB(), String.valueOf(listSoal.get(j).isB()),
-                    listSoal.get(j).getJawabanC(), String.valueOf(listSoal.get(j).isC()),
                     listSoal.get(j).getJawabanD(), String.valueOf(listSoal.get(j).isD()),
+                    listSoal.get(j).getJawabanC(), String.valueOf(listSoal.get(j).isC()),
+                    listSoal.get(j).getJawabanB(), String.valueOf(listSoal.get(j).isB()),
+                    listSoal.get(j).getJawabanA(), String.valueOf(listSoal.get(j).isA()),
                     listSoal.get(j).getJawabanE(), String.valueOf(listSoal.get(j).isE())};
             model.addRow(isibaris);
             control = new int[jTableDaftarSoal.getRowCount()];
