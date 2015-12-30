@@ -7,10 +7,12 @@ package FinalProject;
 
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
+import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
@@ -21,11 +23,13 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.ListIterator;
 import javax.swing.JFileChooser;
+import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.JTable;
 import javax.swing.ListSelectionModel;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
+import javax.swing.filechooser.FileNameExtensionFilter;
 import javax.swing.table.AbstractTableModel;
 import javax.swing.table.DefaultTableModel;
 
@@ -55,6 +59,7 @@ public class Home extends javax.swing.JFrame {
         hapusItemCB();
         refreshCBDaftarSoal(); 
         refreshCBGenerate(); 
+        
        
     }
     
@@ -85,6 +90,11 @@ public class Home extends javax.swing.JFrame {
         jTextAreaDetailSoalJawaban = new javax.swing.JTextArea();
         jButton1 = new javax.swing.JButton();
         jFileChooserGenerate = new javax.swing.JFileChooser();
+        jDialogCredit = new javax.swing.JDialog();
+        jLabel7 = new javax.swing.JLabel();
+        jLabel8 = new javax.swing.JLabel();
+        jLabel9 = new javax.swing.JLabel();
+        jButton2 = new javax.swing.JButton();
         jTabbedPane1 = new javax.swing.JTabbedPane();
         jPanelBuatSoal = new javax.swing.JPanel();
         jPanelMatkulPokokBahasan = new javax.swing.JPanel();
@@ -156,25 +166,12 @@ public class Home extends javax.swing.JFrame {
         jTextFieldGenerateJumlahSoal = new javax.swing.JTextField();
         jLabel6 = new javax.swing.JLabel();
         btnGenerateTampilkan = new javax.swing.JButton();
-        jLabelLokasiFile = new javax.swing.JLabel();
-        jPanel1 = new javax.swing.JPanel();
-        jPanelPilihDaftarMatkul1 = new javax.swing.JPanel();
-        lblDaftarMatkulGenerate1 = new javax.swing.JLabel();
-        cbMatkulExport = new javax.swing.JComboBox();
-        lblDaftarPokokBahasanGenerate1 = new javax.swing.JLabel();
-        cbPokokBahasanExport = new javax.swing.JComboBox();
-        lblJumlahSoalGenerate1 = new javax.swing.JLabel();
-        tfJumlahSoalExport = new javax.swing.JTextField();
-        btnExport = new javax.swing.JButton();
         jMenuBar1 = new javax.swing.JMenuBar();
         jmFile = new javax.swing.JMenu();
-        jmiFileBaru = new javax.swing.JMenuItem();
         jmiFileBuka = new javax.swing.JMenuItem();
         jmiFileSimpan = new javax.swing.JMenuItem();
         jmiFileKeluar = new javax.swing.JMenuItem();
-        jmEdit = new javax.swing.JMenu();
         jmHelp = new javax.swing.JMenu();
-        jmiHelpUserGuide = new javax.swing.JMenuItem();
         jmiHelpTentang = new javax.swing.JMenuItem();
 
         jDialogMKPB.setMinimumSize(new java.awt.Dimension(400, 150));
@@ -327,12 +324,70 @@ public class Home extends javax.swing.JFrame {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
+        jDialogCredit.setMinimumSize(new java.awt.Dimension(546, 189));
+        jDialogCredit.setResizable(false);
+
+        jLabel7.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        jLabel7.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel7.setText("Aplikasi Bank Soal 1.0 Non Portable ini dibuat oleh :");
+
+        jLabel8.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel8.setText("Ahmad Choirun Najib 5214100057");
+
+        jLabel9.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel9.setText("Rizqi Ramadhan 5214100139");
+
+        jButton2.setText("OK");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout jDialogCreditLayout = new javax.swing.GroupLayout(jDialogCredit.getContentPane());
+        jDialogCredit.getContentPane().setLayout(jDialogCreditLayout);
+        jDialogCreditLayout.setHorizontalGroup(
+            jDialogCreditLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jDialogCreditLayout.createSequentialGroup()
+                .addGap(123, 123, 123)
+                .addGroup(jDialogCreditLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jDialogCreditLayout.createSequentialGroup()
+                        .addGap(10, 10, 10)
+                        .addComponent(jLabel9, javax.swing.GroupLayout.DEFAULT_SIZE, 285, Short.MAX_VALUE)
+                        .addGap(14, 14, 14))
+                    .addComponent(jLabel8, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(114, 114, 114))
+            .addComponent(jLabel7, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jDialogCreditLayout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jButton2)
+                .addGap(246, 246, 246))
+        );
+        jDialogCreditLayout.setVerticalGroup(
+            jDialogCreditLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jDialogCreditLayout.createSequentialGroup()
+                .addGap(36, 36, 36)
+                .addComponent(jLabel7, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jLabel8, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jLabel9, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jButton2)
+                .addGap(60, 60, 60))
+        );
+
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Home - BankSoal Portable 1.0");
         setMinimumSize(new java.awt.Dimension(994, 629));
         setPreferredSize(new java.awt.Dimension(1038, 546));
         setResizable(false);
         setSize(new java.awt.Dimension(1038, 546));
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowClosing(java.awt.event.WindowEvent evt) {
+                formWindowClosing(evt);
+            }
+        });
 
         jTabbedPane1.setToolTipText("Buat Soal");
         jTabbedPane1.setName("Buat Soal"); // NOI18N
@@ -915,7 +970,7 @@ public class Home extends javax.swing.JFrame {
         ));
         jScrollPane3.setViewportView(jTableGenerate);
 
-        btnGenerateSoalExport.setText("Simpan Hasil Export");
+        btnGenerateSoalExport.setText("Export Soal");
         btnGenerateSoalExport.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnGenerateSoalExportActionPerformed(evt);
@@ -931,33 +986,26 @@ public class Home extends javax.swing.JFrame {
             }
         });
 
-        jLabelLokasiFile.setText("Location to save file :");
-
         javax.swing.GroupLayout jPanelDaftarMatkul1Layout = new javax.swing.GroupLayout(jPanelDaftarMatkul1);
         jPanelDaftarMatkul1.setLayout(jPanelDaftarMatkul1Layout);
         jPanelDaftarMatkul1Layout.setHorizontalGroup(
             jPanelDaftarMatkul1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanelDaftarMatkul1Layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanelDaftarMatkul1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanelDaftarMatkul1Layout.createSequentialGroup()
-                        .addComponent(cbMatkulGenerate, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(cbPokokBahasanGenerate, javax.swing.GroupLayout.PREFERRED_SIZE, 137, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(btnGenerateTampilkan)
-                        .addGap(18, 18, 18)
-                        .addComponent(jLabel6)
-                        .addGap(18, 18, 18)
-                        .addComponent(jTextFieldGenerateJumlahSoal, javax.swing.GroupLayout.PREFERRED_SIZE, 53, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(btnGenerateSoal)
-                        .addGap(153, 153, 153)
-                        .addComponent(btnGenerateSoalExport, javax.swing.GroupLayout.PREFERRED_SIZE, 159, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(111, 111, 111))
-                    .addGroup(jPanelDaftarMatkul1Layout.createSequentialGroup()
-                        .addComponent(jLabelLokasiFile)
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                .addComponent(cbMatkulGenerate, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(cbPokokBahasanGenerate, javax.swing.GroupLayout.PREFERRED_SIZE, 137, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(btnGenerateTampilkan)
+                .addGap(18, 18, 18)
+                .addComponent(jLabel6)
+                .addGap(18, 18, 18)
+                .addComponent(jTextFieldGenerateJumlahSoal, javax.swing.GroupLayout.PREFERRED_SIZE, 53, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(btnGenerateSoal)
+                .addGap(153, 153, 153)
+                .addComponent(btnGenerateSoalExport, javax.swing.GroupLayout.PREFERRED_SIZE, 159, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(111, 111, 111))
             .addGroup(jPanelDaftarMatkul1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(jPanelDaftarMatkul1Layout.createSequentialGroup()
                     .addContainerGap()
@@ -976,13 +1024,11 @@ public class Home extends javax.swing.JFrame {
                     .addComponent(jTextFieldGenerateJumlahSoal, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel6)
                     .addComponent(btnGenerateTampilkan))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jLabelLokasiFile)
-                .addGap(495, 495, 495))
+                .addGap(536, 536, 536))
             .addGroup(jPanelDaftarMatkul1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelDaftarMatkul1Layout.createSequentialGroup()
-                    .addGap(0, 72, Short.MAX_VALUE)
-                    .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 502, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGap(0, 42, Short.MAX_VALUE)
+                    .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 528, javax.swing.GroupLayout.PREFERRED_SIZE)))
         );
 
         javax.swing.GroupLayout jPanelGenerateSoalLayout = new javax.swing.GroupLayout(jPanelGenerateSoal);
@@ -991,7 +1037,7 @@ public class Home extends javax.swing.JFrame {
             jPanelGenerateSoalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanelGenerateSoalLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jPanelDaftarMatkul1, javax.swing.GroupLayout.PREFERRED_SIZE, 973, Short.MAX_VALUE)
+                .addComponent(jPanelDaftarMatkul1, javax.swing.GroupLayout.DEFAULT_SIZE, 973, Short.MAX_VALUE)
                 .addContainerGap())
         );
         jPanelGenerateSoalLayout.setVerticalGroup(
@@ -1004,102 +1050,7 @@ public class Home extends javax.swing.JFrame {
 
         jTabbedPane1.addTab("Generate Soal", jPanelGenerateSoal);
 
-        jPanelPilihDaftarMatkul1.setBorder(javax.swing.BorderFactory.createTitledBorder("Pilih Daftar Mata Kuliah"));
-
-        lblDaftarMatkulGenerate1.setText("Daftar Mata Kuliah");
-
-        cbMatkulExport.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-        cbMatkulExport.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                cbMatkulExportMouseClicked(evt);
-            }
-        });
-
-        lblDaftarPokokBahasanGenerate1.setText("Daftar Pokok Bahasan");
-
-        cbPokokBahasanExport.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-        cbPokokBahasanExport.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                cbPokokBahasanExportActionPerformed(evt);
-            }
-        });
-
-        lblJumlahSoalGenerate1.setText("Jumlah Soal");
-
-        btnExport.setText("Export");
-
-        javax.swing.GroupLayout jPanelPilihDaftarMatkul1Layout = new javax.swing.GroupLayout(jPanelPilihDaftarMatkul1);
-        jPanelPilihDaftarMatkul1.setLayout(jPanelPilihDaftarMatkul1Layout);
-        jPanelPilihDaftarMatkul1Layout.setHorizontalGroup(
-            jPanelPilihDaftarMatkul1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanelPilihDaftarMatkul1Layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(jPanelPilihDaftarMatkul1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(tfJumlahSoalExport)
-                    .addComponent(cbPokokBahasanExport, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(cbMatkulExport, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addGroup(jPanelPilihDaftarMatkul1Layout.createSequentialGroup()
-                        .addComponent(lblDaftarMatkulGenerate1)
-                        .addGap(129, 129, 129))
-                    .addGroup(jPanelPilihDaftarMatkul1Layout.createSequentialGroup()
-                        .addGroup(jPanelPilihDaftarMatkul1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(btnExport, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addGroup(jPanelPilihDaftarMatkul1Layout.createSequentialGroup()
-                                .addGroup(jPanelPilihDaftarMatkul1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(lblJumlahSoalGenerate1)
-                                    .addComponent(lblDaftarPokokBahasanGenerate1))
-                                .addGap(0, 0, Short.MAX_VALUE)))
-                        .addContainerGap())))
-        );
-        jPanelPilihDaftarMatkul1Layout.setVerticalGroup(
-            jPanelPilihDaftarMatkul1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanelPilihDaftarMatkul1Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(lblDaftarMatkulGenerate1)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(cbMatkulExport, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(lblDaftarPokokBahasanGenerate1)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(cbPokokBahasanExport, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(25, 25, 25)
-                .addComponent(lblJumlahSoalGenerate1)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(tfJumlahSoalExport, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(btnExport, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(13, Short.MAX_VALUE))
-        );
-
-        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
-        jPanel1.setLayout(jPanel1Layout);
-        jPanel1Layout.setHorizontalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(370, 370, 370)
-                .addComponent(jPanelPilihDaftarMatkul1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(383, Short.MAX_VALUE))
-        );
-        jPanel1Layout.setVerticalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(88, 88, 88)
-                .addComponent(jPanelPilihDaftarMatkul1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(248, Short.MAX_VALUE))
-        );
-
-        jTabbedPane1.addTab("Export Soal", jPanel1);
-
         jmFile.setText("File");
-
-        jmiFileBaru.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_N, java.awt.event.InputEvent.CTRL_MASK));
-        jmiFileBaru.setText("Baru..");
-        jmiFileBaru.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jmiFileBaruActionPerformed(evt);
-            }
-        });
-        jmFile.add(jmiFileBaru);
 
         jmiFileBuka.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_O, java.awt.event.InputEvent.CTRL_MASK));
         jmiFileBuka.setText("Buka..");
@@ -1125,16 +1076,14 @@ public class Home extends javax.swing.JFrame {
 
         jMenuBar1.add(jmFile);
 
-        jmEdit.setText("Edit");
-        jMenuBar1.add(jmEdit);
-
         jmHelp.setText("Help");
 
-        jmiHelpUserGuide.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_F1, 0));
-        jmiHelpUserGuide.setText("User Guide");
-        jmHelp.add(jmiHelpUserGuide);
-
-        jmiHelpTentang.setText("Tentang Aplikasi");
+        jmiHelpTentang.setText("Credit");
+        jmiHelpTentang.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jmiHelpTentangActionPerformed(evt);
+            }
+        });
         jmHelp.add(jmiHelpTentang);
 
         jMenuBar1.add(jmHelp);
@@ -1149,33 +1098,21 @@ public class Home extends javax.swing.JFrame {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jTabbedPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 620, Short.MAX_VALUE)
+            .addComponent(jTabbedPane1)
         );
 
         setSize(new java.awt.Dimension(1010, 679));
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jmiFileBaruActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmiFileBaruActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jmiFileBaruActionPerformed
-
-    private void jmiFileBukaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmiFileBukaActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jmiFileBukaActionPerformed
-
+    private File currentCipherFile = new File(System.getProperty("user.dir"));
+    private File currentPlainFile = new File(System.getProperty("user.dir"));
+    private JFileChooser jfc = new JFileChooser();
+    private JFrame jf = new JFrame();
+    private FileNameExtensionFilter textfilter = new FileNameExtensionFilter("Text", "txt", "TXT");
     private void jmiFileSimpanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmiFileSimpanActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jmiFileSimpanActionPerformed
-
-    private void btnDMKTambahActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDMKTambahActionPerformed
-        // TODO add your handling code here:
-        btnOKhandler = 1;
-        jDialogMKPB.setLocationRelativeTo(this);
-        jDialogMKPB.setTitle("Tambah Mata Kuliah");
-        lblMKPB.setText("Masukkan Nama Mata Kuliah");
-        jDialogMKPB.setVisible(true);
-    }//GEN-LAST:event_btnDMKTambahActionPerformed
 
     private void btnOKActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnOKActionPerformed
         // TODO add your handling code here:
@@ -1210,156 +1147,331 @@ public class Home extends javax.swing.JFrame {
         }
         
     }//GEN-LAST:event_btnOKActionPerformed
-
-    private void btnDMKHapusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDMKHapusActionPerformed
+    
+        
+        JFileChooser chooser = new JFileChooser();
+    int result;
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
-        if (daftarMatkul.isEmpty() == true) {
+        jFrameDetailSoal.dispose();
+    }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void jTextFieldDetailSoalMataKuliahActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextFieldDetailSoalMataKuliahActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTextFieldDetailSoalMataKuliahActionPerformed
+
+    private void jmiFileBukaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmiFileBukaActionPerformed
+        // TODO add your handling code here:
+        try {
+            String temporaryPath = searchOpenPath();
+            if (temporaryPath.equalsIgnoreCase("")) {
+                return;
+            }
+            try {
+                currentPlainFile = new File(temporaryPath);
+            } catch (Exception e) {
+            }
+
+            String path = temporaryPath;
+
+            BufferedReader br = new BufferedReader(new FileReader(temporaryPath));
+            String line = null;
+
+            while ((line = br.readLine()) != null) {
+                String[] values = line.split(",");
+
+                listSoal.add(new Pertanyaan(
+                    values[0],values[1], values[3],
+                    values[4], Boolean.parseBoolean(values[5]),
+                    values[4], Boolean.parseBoolean(values[5]),
+                    values[6], Boolean.parseBoolean(values[7]),
+                    values[8], Boolean.parseBoolean(values[9]),
+                    values[10], Boolean.parseBoolean(values[11])));
+
+            for (int j = 0; j < listSoal.size(); j++) {
+                daftarMatkul.add(listSoal.get(j).getMatkul());
+                daftarPokokBahasan.add(listSoal.get(j).getPokbas());
+            }
+
+            refreshCBAll();
+
+            /*for (String str : values) {
+                System.out.println(str);
+            }*/
+        }
+        br.close();
+        JOptionPane.showMessageDialog(null, "File berhasil di Import!");
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "File gagal di Import!");
+            System.out.println(e.getMessage());
+        }
+
+    }//GEN-LAST:event_jmiFileBukaActionPerformed
+
+    private void jTabbedPane1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTabbedPane1MouseClicked
+        // TODO add your handling code here:
+        refreshCBAll();
+        //refreshCBDaftarSoal();
+        setPropertiTabel();
+        //refreshCBGenerate();
+    }//GEN-LAST:event_jTabbedPane1MouseClicked
+
+    private void btnGenerateTampilkanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGenerateTampilkanActionPerformed
+        // TODO add your handling code here:
+        if (listSoal.isEmpty() == true) {
             JOptionPane.showMessageDialog(this, "Tidak ada data!","Peringatan", JOptionPane.WARNING_MESSAGE);
         } else {
-            Object cbterpilih =  cbMatkul.getSelectedItem();
-            String strcbterpilih = cbterpilih.toString();
-
-            int dialogButton = JOptionPane.YES_NO_OPTION;
-            int dialogResult = JOptionPane.showConfirmDialog(this,
-                    "Anda yakin ingin menghapus "+strcbterpilih+"?", "Hapus Item",
-                    dialogButton, JOptionPane.WARNING_MESSAGE);
-            JOptionPane pesan = new JOptionPane();
-            if(dialogResult == 0) {
-              //System.out.println("Yes option");
-                int lokasiitem = daftarMatkul.indexOf(strcbterpilih);
-                cbMatkul.removeItem(daftarMatkul.get(lokasiitem));
-                try {
-                    daftarMatkul.remove(strcbterpilih);
-                } catch (IndexOutOfBoundsException e) {
-                    pesan.showMessageDialog(this, "Tidak ada data!","Peringatan", JOptionPane.WARNING_MESSAGE);
-                }
-
-                pesan.showMessageDialog(this, "Mata Kuliah berhasil dihapus!");
-            } else {
-             pesan.hide();
-            } 
-        }
-    }//GEN-LAST:event_btnDMKHapusActionPerformed
-
-    private void btnDPBTambahActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDPBTambahActionPerformed
-        // TODO add your handling code here:
-        btnOKhandler = 2;
-        jDialogMKPB.setLocationRelativeTo(this);
-        jDialogMKPB.setTitle("Tambah Pokok Bahasan");
-        lblMKPB.setText("Masukkan Nama Pokok Bahasan");
-        jDialogMKPB.setVisible(true);
-    }//GEN-LAST:event_btnDPBTambahActionPerformed
-
-    private void btnDPBHapusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDPBHapusActionPerformed
-        // TODO add your handling code here:
-        if (daftarPokokBahasan.isEmpty() == true) {
-            JOptionPane.showMessageDialog(this, "Tidak ada data!","Peringatan", JOptionPane.WARNING_MESSAGE);
-        } else {
-            Object cbterpilih =  cbPokokBahasan.getSelectedItem();
-            String strcbterpilih = cbterpilih.toString();
-
-            int dialogButton = JOptionPane.YES_NO_OPTION;
-            int dialogResult = JOptionPane.showConfirmDialog(this,
-                    "Anda yakin ingin menghapus "+strcbterpilih+"?", "Hapus Item",
-                    dialogButton, JOptionPane.WARNING_MESSAGE);
-            JOptionPane pesan = new JOptionPane();
-            if(dialogResult == 0) {
-              //System.out.println("Yes option");
-                int lokasiitem = daftarPokokBahasan.indexOf(strcbterpilih);
-                cbPokokBahasan.removeItem(daftarPokokBahasan.get(lokasiitem));
-                try {
-                    daftarPokokBahasan.remove(strcbterpilih);
-                } catch (IndexOutOfBoundsException e) {
-                    pesan.showMessageDialog(this, "Tidak ada data!","Peringatan", JOptionPane.WARNING_MESSAGE);
-                }
-
-                pesan.showMessageDialog(this, "Pokok Bahasan berhasil dihapus!");
-            } else {
-              pesan.hide();
-            } 
-        }
-    }//GEN-LAST:event_btnDPBHapusActionPerformed
-
-    private void cbMatkulActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbMatkulActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_cbMatkulActionPerformed
-
-    private void cbMatkulMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_cbMatkulMouseClicked
-        // TODO add your handling code here:
-        /*
-        Object cbterpilih =  cbMatkul.getSelectedItem();
-        String strcbterpilih = cbterpilih.toString();
-        String namaPokBas = "namaList"+strcbterpilih;
-
-        LinkedList namaListPokBas = new LinkedList();
-        cbPokokBahasan.removeAllItems();
-        for (int i = 0; i < namaListPokBas.size(); i++) {
-            cbPokokBahasan.addItem(namaListPokBas.get(i));
-        }
-        */
-    }//GEN-LAST:event_cbMatkulMouseClicked
-
-    private void btnSimpanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSimpanActionPerformed
-        // TODO add your handling code here:
-        Object cbMatkulTerpilih =  cbMatkul.getSelectedItem();
-        Object cbPokokBahasanTerpilih =  cbPokokBahasan.getSelectedItem();
-        if (cbMatkulTerpilih == null || cbPokokBahasanTerpilih == null) {
-            JOptionPane.showMessageDialog(this, "Anda belum memilih Mata Kuliah atau Pokok Bahasan");
-            cbMatkul.requestFocus(true);
-        } else {
+            controlmodel = 1;
+            model.setRowCount(0);
+            Object cbMatkulTerpilih =  cbMatkulGenerate.getSelectedItem();
+            Object cbPokokBahasanTerpilih =  cbPokokBahasanGenerate.getSelectedItem();
             String strcbMatkulTerpilih = cbMatkulTerpilih.toString();
             String strcbPokokBahasanTerpilih = cbPokokBahasanTerpilih.toString();
-        
-            listSoal.add(new Pertanyaan(strcbMatkulTerpilih, strcbPokokBahasanTerpilih, 
-                jTextAreaSoal.getText(), 
-                jTextAreaJawabanA.getText(), jRadioButtonJawabanA.isSelected(), 
-                jTextAreaJawabanB.getText(), jRadioButtonJawabanB.isSelected(),
-                jTextAreaJawabanC.getText(), jRadioButtonJawabanC.isSelected(), 
-                jTextAreaJawabanD.getText(), jRadioButtonJawabanD.isSelected(),
-                jTextAreaJawabanE.getText(), jRadioButtonJawabanE.isSelected()));
-        
-            refreshCBDaftarSoal(); 
-            refreshCBGenerate(); 
+
+            int no = 1;
+            for (int j = 0; j < listSoal.size(); j++) {
+                String nomor = String.valueOf(no);
+                String [] isibaris = {nomor, listSoal.get(j).getMatkul(), listSoal.get(j).getPokbas(),
+                    listSoal.get(j).getPertanyaan(),
+                    listSoal.get(j).getJawabanA(), String.valueOf(listSoal.get(j).isA()),
+                    listSoal.get(j).getJawabanB(), String.valueOf(listSoal.get(j).isB()),
+                    listSoal.get(j).getJawabanC(), String.valueOf(listSoal.get(j).isC()),
+                    listSoal.get(j).getJawabanD(), String.valueOf(listSoal.get(j).isD()),
+                    listSoal.get(j).getJawabanE(), String.valueOf(listSoal.get(j).isE())};
+                if (listSoal.get(j).getMatkul() == strcbMatkulTerpilih
+                    && listSoal.get(j).getPokbas() == strcbPokokBahasanTerpilih ) {
+                    model.addRow(isibaris);
+                    for (int k = 0; k < jTableGenerate.getRowCount(); k++) {
+                        control = new int[jTableGenerate.getRowCount()];
+                        control[k] = j;
+                    }
+                    no++;
+                    
+                    /*
+                    soalExport = new LinkedList<Pertanyaan>();
+                    soalExport.add(new Pertanyaan(listSoal.get(j).getMatkul(), listSoal.get(j).getPokbas(),
+                        listSoal.get(j).getPertanyaan(),
+                        listSoal.get(j).getJawabanA(), listSoal.get(j).isA(),
+                        listSoal.get(j).getJawabanB(), listSoal.get(j).isB(),
+                        listSoal.get(j).getJawabanC(), listSoal.get(j).isC(),
+                        listSoal.get(j).getJawabanD(), listSoal.get(j).isD(),
+                        listSoal.get(j).getJawabanE(), listSoal.get(j).isE()));
+                    */
+            }
+        }
+
+        }
+    }//GEN-LAST:event_btnGenerateTampilkanActionPerformed
+
+    private void btnGenerateSoalExportActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGenerateSoalExportActionPerformed
+        // TODO add your handling code here:
+        if (listSoal.isEmpty() == true) {
+            JOptionPane.showMessageDialog(this, "Tidak ada data!","Peringatan", JOptionPane.WARNING_MESSAGE);
+        } else {
+            JFileChooser chooser = new JFileChooser();
+            chooser.showSaveDialog(this);
+            File f = chooser.getSelectedFile();
+            String filename3 = f.getAbsolutePath();
+            try {
+                FileWriter fstream = new FileWriter(filename3 + ".txt");
+                BufferedWriter out = new BufferedWriter(fstream);
+                for (int j = 0; j < listSoal.size(); j++) {
+                    /*
+                    String isibaris = "\""+listSoal.get(j).getMatkul() +"\""+","+"\""+ listSoal.get(j).getPokbas()+"\""+","+
+                    "\""+listSoal.get(j).getPertanyaan()+"\""+","+
+                    "\""+listSoal.get(j).getJawabanA()+"\""+","+"\""+ String.valueOf(listSoal.get(j).isA())+"\""+","+
+                    "\""+listSoal.get(j).getJawabanB()+"\""+","+"\""+ String.valueOf(listSoal.get(j).isB())+"\""+","+
+                    "\""+listSoal.get(j).getJawabanC()+"\""+","+"\""+ String.valueOf(listSoal.get(j).isC())+"\""+","+
+                    "\""+listSoal.get(j).getJawabanD()+"\""+","+"\""+ String.valueOf(listSoal.get(j).isD())+"\""+","+
+                    "\""+listSoal.get(j).getJawabanE()+"\""+","+"\""+ String.valueOf(listSoal.get(j).isE())+"\"";
+                    */
+                    String isibaris = listSoal.get(j).getMatkul() +","+ listSoal.get(j).getPokbas()+","+
+                    listSoal.get(j).getPertanyaan()+","+
+                    listSoal.get(j).getJawabanA()+","+ String.valueOf(listSoal.get(j).isA())+","+
+                    listSoal.get(j).getJawabanB()+","+ String.valueOf(listSoal.get(j).isB())+","+
+                    listSoal.get(j).getJawabanC()+","+ String.valueOf(listSoal.get(j).isC())+","+
+                    listSoal.get(j).getJawabanD()+","+ String.valueOf(listSoal.get(j).isD())+","+
+                    listSoal.get(j).getJawabanE()+","+ String.valueOf(listSoal.get(j).isE())+"\"";
+                    out.write(isibaris);
+                }
+                out.close();
+                //System.out.println("File created successfully.");
+                //jLabelLokasiFile.setText("File berhasil di simpan di folder Project Netbeans");
+                JOptionPane.showMessageDialog(this, "File telah berhasil disimpan!","Sukses!", JOptionPane.INFORMATION_MESSAGE);
+
+            } catch (Exception e) {
+                JOptionPane.showMessageDialog(this, "File gagal disimpan!","Gagal!", JOptionPane.ERROR_MESSAGE);
+            }
+        }
+
+    }//GEN-LAST:event_btnGenerateSoalExportActionPerformed
+
+    private void btnGenerateSoalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGenerateSoalActionPerformed
+        // TODO add your handling code here:
+        //WriteToFile(soalExport);
+
+        if (listSoal.isEmpty() == true) {
+            JOptionPane.showMessageDialog(this, "Tidak ada data!","Peringatan", JOptionPane.WARNING_MESSAGE);
+        } else {
+            model.setRowCount(0);
+            Object cbMatkulTerpilih =  cbMatkulGenerate.getSelectedItem();
+            Object cbPokokBahasanTerpilih =  cbPokokBahasanGenerate.getSelectedItem();
+            String strcbMatkulTerpilih = cbMatkulTerpilih.toString();
+            String strcbPokokBahasanTerpilih = cbPokokBahasanTerpilih.toString();
             
-            JOptionPane.showMessageDialog(this, "Soal ke "+ (i+1) +" berhasil ditambahkan!"
-                + "\nSilahkan mengisi soal berikutnya.");
-            i++;
-            //lblNomorSoal.setText(""+(i+1));
-            jTextAreaSoal.setText("");
-            jTextAreaJawabanA.setText("");
-            jTextAreaJawabanB.setText("");
-            jTextAreaJawabanC.setText("");
-            jTextAreaJawabanD.setText("");
-            jTextAreaJawabanE.setText("");
-            jRadioButtonJawabanA.setSelected(false);
-            jRadioButtonJawabanB.setSelected(false);
-            jRadioButtonJawabanC.setSelected(false);
-            jRadioButtonJawabanD.setSelected(false);
-            jRadioButtonJawabanE.setSelected(false);
             
+            int no = 1;
+            /*
+            for (int j = 0; j < listSoal.size(); j++) {
+                String nomor = String.valueOf(no);
+                if (strcbMatkulTerpilih.equals(listSoal.get(j).getMatkul())
+                    && listSoal.get(j).getPokbas().equals(strcbPokokBahasanTerpilih) ) {
+                    soalExport = new LinkedList<Pertanyaan>();
+                    soalExport.add(new Pertanyaan(listSoal.get(j).getMatkul(), listSoal.get(j).getPokbas(),
+                        listSoal.get(j).getPertanyaan(),
+                        listSoal.get(j).getJawabanA(), listSoal.get(j).isA(),
+                        listSoal.get(j).getJawabanB(), listSoal.get(j).isB(),
+                        listSoal.get(j).getJawabanC(), listSoal.get(j).isC(),
+                        listSoal.get(j).getJawabanD(), listSoal.get(j).isD(),
+                        listSoal.get(j).getJawabanE(), listSoal.get(j).isE()));
+            }
+            */
+                Collections.shuffle(listSoal);
+                controlmodel = 2;
+                int jumlah = Integer.parseInt(jTextFieldGenerateJumlahSoal.getText());
+                System.out.println(jumlah);
+                for (int n = 0; n < listSoal.size(); n++) {
+                    String nomorr = String.valueOf(no);
+                    String [] isibariss = {nomorr, listSoal.get(n).getMatkul(), listSoal.get(n).getPokbas(),
+                        listSoal.get(n).getPertanyaan(),
+                        listSoal.get(n).getJawabanD(), String.valueOf(listSoal.get(n).isD()),
+                        listSoal.get(n).getJawabanC(), String.valueOf(listSoal.get(n).isC()),
+                        listSoal.get(n).getJawabanB(), String.valueOf(listSoal.get(n).isB()),
+                        listSoal.get(n).getJawabanA(), String.valueOf(listSoal.get(n).isA()),
+                        listSoal.get(n).getJawabanE(), String.valueOf(listSoal.get(n).isE())};
+                    if (strcbMatkulTerpilih.equals(listSoal.get(n).getMatkul())
+                            && listSoal.get(n).getPokbas().equals(strcbPokokBahasanTerpilih) ) {
+                            model.addRow(isibariss);
+                    }
+                    //System.out.println("jumlah row = "+jTableGenerate.getRowCount());
+                    //System.out.println("jumlah ukuran soalExport = "+listSoal.size());
+
+
+
+                    control = new int[jTableGenerate.getRowCount()];
+                    control[n] = n;
+                    no++;
         }
         
-        
-        //String listSoal = strcbMatkulTerpilih+strcbPokokBahasanTerpilih;
-        //listSoal.add(strcbMatkulTerpilih,strcbPokokBahasanTerpilih,jTextAreaSoal.getText());
-        /*Pertanyaan a = new Pertanyaan("Najib",true,true, false, false, false);
-        
-        a.getPertanyaan();
-                LinkedList soal = new LinkedList();
-        soal.add(a.getPertanyaan());*/
-        /*
-        System.out.println(
-                listSoal.get(index).matkul + "\n" + listSoal.get(index).pokbas
-                +listSoal.get(index).pertanyaan +"\n"
-                + listSoal.get(index).jawabanA+" = " + listSoal.get(index).isA() + "\n"
-                + listSoal.get(index).jawabanB+" = " + listSoal.get(index).isB() + "\n"
-                + listSoal.get(index).jawabanC+" = " + listSoal.get(index).isC() + "\n"
-                + listSoal.get(index).jawabanD+" = " + listSoal.get(index).isD() + "\n"
-                + listSoal.get(index).jawabanE+" = " + listSoal.get(index).isE() + "\n"
-                );
-        */
-        
-    }//GEN-LAST:event_btnSimpanActionPerformed
+       
+                int tampil = listSoal.size() - jumlah;
+                for (int k = 0; k < tampil; k++) {
+                    model.removeRow(k);
+                }
+
+        }
+
+    }//GEN-LAST:event_btnGenerateSoalActionPerformed
+
+    private void cbMatkulDaftarSoalMatkulActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbMatkulDaftarSoalMatkulActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_cbMatkulDaftarSoalMatkulActionPerformed
+
+    private void btnTampilkanDaftarSoalperPokBasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTampilkanDaftarSoalperPokBasActionPerformed
+        // TODO add your handling code here:
+        if (listSoal.isEmpty() == true) {
+            JOptionPane.showMessageDialog(this, "Tidak ada data!","Peringatan", JOptionPane.WARNING_MESSAGE);
+        } else {
+            model.setRowCount(0);
+            Object cbMatkulTerpilih =  cbMatkulDaftarSoalMatkul1.getSelectedItem();
+            Object cbPokokBahasanTerpilih =  cbPokokBahasanDaftarSoalPokBas.getSelectedItem();
+            String strcbMatkulTerpilih = cbMatkulTerpilih.toString();
+            String strcbPokokBahasanTerpilih = cbPokokBahasanTerpilih.toString();
+
+            int no = 1;
+            for (int j = 0; j < listSoal.size(); j++) {
+                String nomor = String.valueOf(no);
+                String [] isibaris = {nomor, listSoal.get(j).getMatkul(), listSoal.get(j).getPokbas(),
+                    listSoal.get(j).getPertanyaan(),
+                    listSoal.get(j).getJawabanA(), String.valueOf(listSoal.get(j).isA()),
+                    listSoal.get(j).getJawabanB(), String.valueOf(listSoal.get(j).isB()),
+                    listSoal.get(j).getJawabanC(), String.valueOf(listSoal.get(j).isC()),
+                    listSoal.get(j).getJawabanD(), String.valueOf(listSoal.get(j).isD()),
+                    listSoal.get(j).getJawabanE(), String.valueOf(listSoal.get(j).isE())};
+                if (listSoal.get(j).getMatkul() == strcbMatkulTerpilih
+                    && listSoal.get(j).getPokbas() == strcbPokokBahasanTerpilih ) {
+                    model.addRow(isibaris);
+                    for (int k = 0; k < jTableDaftarSoal.getRowCount(); k++) {
+                        control = new int[jTableDaftarSoal.getRowCount()];
+                        control[k] = j;
+                    }
+                    no++;
+                }
+
+            }
+        }
+        //        updateDataTabel();
+    }//GEN-LAST:event_btnTampilkanDaftarSoalperPokBasActionPerformed
+
+    private void btnTampilkanDaftarSoalperMatkulActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTampilkanDaftarSoalperMatkulActionPerformed
+        // TODO add your handling code here:
+        if (listSoal.isEmpty() == true) {
+            JOptionPane.showMessageDialog(this, "Tidak ada data!","Peringatan", JOptionPane.WARNING_MESSAGE);
+        } else {
+            model.setRowCount(0);
+            Object cbMatkulTerpilih =  cbMatkulDaftarSoalMatkul.getSelectedItem();
+            String strcbMatkulTerpilih = cbMatkulTerpilih.toString();
+
+            int no = 1;
+            for (int j = 0; j < listSoal.size(); j++) {
+                String nomor = String.valueOf(no);
+                String [] isibaris = {nomor, listSoal.get(j).getMatkul(), listSoal.get(j).getPokbas(),
+                    listSoal.get(j).getPertanyaan(),
+                    listSoal.get(j).getJawabanA(), String.valueOf(listSoal.get(j).isA()),
+                    listSoal.get(j).getJawabanB(), String.valueOf(listSoal.get(j).isB()),
+                    listSoal.get(j).getJawabanC(), String.valueOf(listSoal.get(j).isC()),
+                    listSoal.get(j).getJawabanD(), String.valueOf(listSoal.get(j).isD()),
+                    listSoal.get(j).getJawabanE(), String.valueOf(listSoal.get(j).isE())};
+                if (listSoal.get(j).getMatkul() == strcbMatkulTerpilih ) {
+                    model.addRow(isibaris);
+                    for (int k = 0; k < jTableDaftarSoal.getRowCount(); k++) {
+                        control = new int[jTableDaftarSoal.getRowCount()];
+                        control[k] = j;
+                    }
+
+                    no++;
+                }
+
+            }
+        }
+    }//GEN-LAST:event_btnTampilkanDaftarSoalperMatkulActionPerformed
+
+    private void btnTampilkanDaftarSoalSemuaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTampilkanDaftarSoalSemuaActionPerformed
+        // TODO add your handling code here:
+        if (listSoal.isEmpty() == true) {
+            JOptionPane.showMessageDialog(this, "Tidak ada data!","Peringatan", JOptionPane.WARNING_MESSAGE);
+        } else {
+            model.setRowCount(0);
+
+            int no = 1;
+            for (int j = 0; j < listSoal.size(); j++) {
+                String nomor = String.valueOf(no);
+
+                String [] isibaris = {nomor, listSoal.get(j).getMatkul(), listSoal.get(j).getPokbas(),
+                    listSoal.get(j).getPertanyaan(),
+                    listSoal.get(j).getJawabanA(), String.valueOf(listSoal.get(j).isA()),
+                    listSoal.get(j).getJawabanB(), String.valueOf(listSoal.get(j).isB()),
+                    listSoal.get(j).getJawabanC(), String.valueOf(listSoal.get(j).isC()),
+                    listSoal.get(j).getJawabanD(), String.valueOf(listSoal.get(j).isD()),
+                    listSoal.get(j).getJawabanE(), String.valueOf(listSoal.get(j).isE())};
+
+                model.addRow(isibaris);
+                control = new int[jTableDaftarSoal.getRowCount()];
+                control[j] = j;
+                no++;
+            }
+        }
+    }//GEN-LAST:event_btnTampilkanDaftarSoalSemuaActionPerformed
 
     private void btnPalingAkhirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPalingAkhirActionPerformed
         // TODO add your handling code here:
@@ -1381,6 +1493,19 @@ public class Home extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_btnPalingAwalActionPerformed
 
+    private void btnSebelumnyaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSebelumnyaActionPerformed
+        // TODO add your handling code here:
+        if (listSoal.isEmpty() == true) {
+            JOptionPane.showMessageDialog(this, "Tidak ada data!","Peringatan", JOptionPane.WARNING_MESSAGE);
+        } else {
+            i--;
+            if(i <= 0) {
+                i = listSoal.size()-1;
+            }
+            tampil();
+        }
+    }//GEN-LAST:event_btnSebelumnyaActionPerformed
+
     private void btnSelanjutnyaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSelanjutnyaActionPerformed
         // TODO add your handling code here:
         if (listSoal.isEmpty() == true) {
@@ -1394,18 +1519,30 @@ public class Home extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_btnSelanjutnyaActionPerformed
 
-    private void btnSebelumnyaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSebelumnyaActionPerformed
+    private void btnHapusSoalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnHapusSoalActionPerformed
         // TODO add your handling code here:
         if (listSoal.isEmpty() == true) {
             JOptionPane.showMessageDialog(this, "Tidak ada data!","Peringatan", JOptionPane.WARNING_MESSAGE);
         } else {
-            i--;
-            if(i <= 0) {
-                i = listSoal.size()-1;
+            int dialogButton = JOptionPane.YES_NO_OPTION;
+            int dialogResult = JOptionPane.showConfirmDialog(this,
+                "Anda yakin ingin menghapus Soal?", "Hapus Soal",
+                dialogButton, JOptionPane.WARNING_MESSAGE);
+            if(dialogResult == 0) {
+                //System.out.println("Yes option");
+                try {
+                    listSoal.remove(i);
+                    JOptionPane.showMessageDialog(this, "Soal berhasil dihapus!");
+                } catch (IndexOutOfBoundsException e) {
+                    JOptionPane.showMessageDialog(this, "Tidak ada data!","Peringatan", JOptionPane.WARNING_MESSAGE);
+                }
+
+            } else {
+                setVisible(false);
             }
-            tampil();        
         }
-    }//GEN-LAST:event_btnSebelumnyaActionPerformed
+
+    }//GEN-LAST:event_btnHapusSoalActionPerformed
 
     private void btnEditActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditActionPerformed
         // TODO add your handling code here:
@@ -1421,256 +1558,100 @@ public class Home extends javax.swing.JFrame {
                 String strcbMatkulTerpilih = cbMatkulTerpilih.toString();
                 String strcbPokokBahasanTerpilih = cbPokokBahasanTerpilih.toString();
 
-                listSoal.add(i, new Pertanyaan(strcbMatkulTerpilih, strcbPokokBahasanTerpilih, 
-                    jTextAreaSoal.getText(), 
-                    jTextAreaJawabanA.getText(), jRadioButtonJawabanA.isSelected(), 
+                listSoal.add(i, new Pertanyaan(strcbMatkulTerpilih, strcbPokokBahasanTerpilih,
+                    jTextAreaSoal.getText(),
+                    jTextAreaJawabanA.getText(), jRadioButtonJawabanA.isSelected(),
                     jTextAreaJawabanB.getText(), jRadioButtonJawabanB.isSelected(),
-                    jTextAreaJawabanC.getText(), jRadioButtonJawabanC.isSelected(), 
+                    jTextAreaJawabanC.getText(), jRadioButtonJawabanC.isSelected(),
                     jTextAreaJawabanD.getText(), jRadioButtonJawabanD.isSelected(),
                     jTextAreaJawabanE.getText(), jRadioButtonJawabanE.isSelected()));
-                try {
-                    listSoal.remove((i+1));
-                    JOptionPane.showMessageDialog(this, "Soal ke "+ (i+1) +" berhasil diedit!"
+            try {
+                listSoal.remove((i+1));
+                JOptionPane.showMessageDialog(this, "Soal ke "+ (i+1) +" berhasil diedit!"
                     + "\nSilahkan mengisi soal berikutnya.");
-                } catch (IndexOutOfBoundsException e) {
-                    JOptionPane.showMessageDialog(this, "Tidak ada data!","Peringatan", JOptionPane.WARNING_MESSAGE);
-                }
+            } catch (IndexOutOfBoundsException e) {
+                JOptionPane.showMessageDialog(this, "Tidak ada data!","Peringatan", JOptionPane.WARNING_MESSAGE);
+            }
 
-
-
-                i++;
-                //lblNomorSoal.setText(""+(i+1));
-                jTextAreaSoal.setText("");
-                jTextAreaJawabanA.setText("");
-                jTextAreaJawabanB.setText("");
-                jTextAreaJawabanC.setText("");
-                jTextAreaJawabanD.setText("");
-                jTextAreaJawabanE.setText("");
-                jRadioButtonJawabanA.setSelected(false);
+            i++;
+            //lblNomorSoal.setText(""+(i+1));
+            jTextAreaSoal.setText("");
+            jTextAreaJawabanA.setText("");
+            jTextAreaJawabanB.setText("");
+            jTextAreaJawabanC.setText("");
+            jTextAreaJawabanD.setText("");
+            jTextAreaJawabanE.setText("");
+            jRadioButtonJawabanA.setSelected(false);
             jRadioButtonJawabanB.setSelected(false);
             jRadioButtonJawabanC.setSelected(false);
             jRadioButtonJawabanD.setSelected(false);
             jRadioButtonJawabanE.setSelected(false);
 
-
-            }
+        }
         }
     }//GEN-LAST:event_btnEditActionPerformed
 
-    private void btnHapusSoalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnHapusSoalActionPerformed
-        // TODO add your handling code here:
-        if (listSoal.isEmpty() == true) {
-            JOptionPane.showMessageDialog(this, "Tidak ada data!","Peringatan", JOptionPane.WARNING_MESSAGE);
-        } else {
-            int dialogButton = JOptionPane.YES_NO_OPTION;
-            int dialogResult = JOptionPane.showConfirmDialog(this,
-                    "Anda yakin ingin menghapus Soal?", "Hapus Soal",
-                    dialogButton, JOptionPane.WARNING_MESSAGE);
-            if(dialogResult == 0) {
-              //System.out.println("Yes option");
-                try {
-                    listSoal.remove(i);
-                    JOptionPane.showMessageDialog(this, "Soal berhasil dihapus!");
-                } catch (IndexOutOfBoundsException e) {
-                    JOptionPane.showMessageDialog(this, "Tidak ada data!","Peringatan", JOptionPane.WARNING_MESSAGE);
-                }
-
-
-            } else {
-              setVisible(false);
-            } 
-        }
-        
-    }//GEN-LAST:event_btnHapusSoalActionPerformed
-    
-    
-    private void jTabbedPane1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTabbedPane1MouseClicked
-        // TODO add your handling code here:
-        refreshCBDaftarSoal();
-        setPropertiTabel();
-        refreshCBGenerate();
-    }//GEN-LAST:event_jTabbedPane1MouseClicked
-
-    private void btnTampilkanDaftarSoalperPokBasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTampilkanDaftarSoalperPokBasActionPerformed
-        // TODO add your handling code here:
-        if (listSoal.isEmpty() == true) {
-            JOptionPane.showMessageDialog(this, "Tidak ada data!","Peringatan", JOptionPane.WARNING_MESSAGE);
-        } else {
-            model.setRowCount(0);
-            Object cbMatkulTerpilih =  cbMatkulDaftarSoalMatkul1.getSelectedItem();
-            Object cbPokokBahasanTerpilih =  cbPokokBahasanDaftarSoalPokBas.getSelectedItem();
-            String strcbMatkulTerpilih = cbMatkulTerpilih.toString();
-            String strcbPokokBahasanTerpilih = cbPokokBahasanTerpilih.toString();
-            
-            int no = 1;
-            for (int j = 0; j < listSoal.size(); j++) {
-                String nomor = String.valueOf(no);
-                String [] isibaris = {nomor, listSoal.get(j).getMatkul(), listSoal.get(j).getPokbas(),
-                    listSoal.get(j).getPertanyaan(),
-                    listSoal.get(j).getJawabanA(), String.valueOf(listSoal.get(j).isA()),
-                    listSoal.get(j).getJawabanB(), String.valueOf(listSoal.get(j).isB()),
-                    listSoal.get(j).getJawabanC(), String.valueOf(listSoal.get(j).isC()),
-                    listSoal.get(j).getJawabanD(), String.valueOf(listSoal.get(j).isD()),
-                    listSoal.get(j).getJawabanE(), String.valueOf(listSoal.get(j).isE())};
-                if (listSoal.get(j).getMatkul() == strcbMatkulTerpilih 
-                        && listSoal.get(j).getPokbas() == strcbPokokBahasanTerpilih ) {
-                    model.addRow(isibaris);
-                    for (int k = 0; k < jTableDaftarSoal.getRowCount(); k++) {
-                        control = new int[jTableDaftarSoal.getRowCount()];
-                        control[k] = j;
-                    }
-                    no++;
-                }        
-                
-            }
-        }
-//        updateDataTabel();
-    }//GEN-LAST:event_btnTampilkanDaftarSoalperPokBasActionPerformed
-
-    private void btnTampilkanDaftarSoalperMatkulActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTampilkanDaftarSoalperMatkulActionPerformed
-        // TODO add your handling code here:
-        if (listSoal.isEmpty() == true) {
-            JOptionPane.showMessageDialog(this, "Tidak ada data!","Peringatan", JOptionPane.WARNING_MESSAGE);
-        } else {
-            model.setRowCount(0);
-            Object cbMatkulTerpilih =  cbMatkulDaftarSoalMatkul.getSelectedItem();
-            String strcbMatkulTerpilih = cbMatkulTerpilih.toString();
-            
-            int no = 1;
-            for (int j = 0; j < listSoal.size(); j++) {
-                String nomor = String.valueOf(no);
-                String [] isibaris = {nomor, listSoal.get(j).getMatkul(), listSoal.get(j).getPokbas(),
-                    listSoal.get(j).getPertanyaan(),
-                    listSoal.get(j).getJawabanA(), String.valueOf(listSoal.get(j).isA()),
-                    listSoal.get(j).getJawabanB(), String.valueOf(listSoal.get(j).isB()),
-                    listSoal.get(j).getJawabanC(), String.valueOf(listSoal.get(j).isC()),
-                    listSoal.get(j).getJawabanD(), String.valueOf(listSoal.get(j).isD()),
-                    listSoal.get(j).getJawabanE(), String.valueOf(listSoal.get(j).isE())};
-                if (listSoal.get(j).getMatkul() == strcbMatkulTerpilih ) {
-                    model.addRow(isibaris);
-                    for (int k = 0; k < jTableDaftarSoal.getRowCount(); k++) {
-                        control = new int[jTableDaftarSoal.getRowCount()];
-                        control[k] = j;
-                    }
-                    
-                    no++;
-                }        
-                
-            }
-        }
-    }//GEN-LAST:event_btnTampilkanDaftarSoalperMatkulActionPerformed
-
-    private void btnTampilkanDaftarSoalSemuaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTampilkanDaftarSoalSemuaActionPerformed
-        // TODO add your handling code here:
-        if (listSoal.isEmpty() == true) {
-            JOptionPane.showMessageDialog(this, "Tidak ada data!","Peringatan", JOptionPane.WARNING_MESSAGE);
-        } else {
-            model.setRowCount(0);
-           
-            int no = 1;
-            for (int j = 0; j < listSoal.size(); j++) {
-                String nomor = String.valueOf(no);
-                
-                String [] isibaris = {nomor, listSoal.get(j).getMatkul(), listSoal.get(j).getPokbas(),
-                    listSoal.get(j).getPertanyaan(),
-                    listSoal.get(j).getJawabanA(), String.valueOf(listSoal.get(j).isA()),
-                    listSoal.get(j).getJawabanB(), String.valueOf(listSoal.get(j).isB()),
-                    listSoal.get(j).getJawabanC(), String.valueOf(listSoal.get(j).isC()),
-                    listSoal.get(j).getJawabanD(), String.valueOf(listSoal.get(j).isD()),
-                    listSoal.get(j).getJawabanE(), String.valueOf(listSoal.get(j).isE())};
-                    
-                    model.addRow(isibaris);
-                    control = new int[jTableDaftarSoal.getRowCount()];
-                    control[j] = j;
-                no++;
-            }
-        }
-    }//GEN-LAST:event_btnTampilkanDaftarSoalSemuaActionPerformed
-
-    private void cbMatkulDaftarSoalMatkulActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbMatkulDaftarSoalMatkulActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_cbMatkulDaftarSoalMatkulActionPerformed
-
-    private void cbMatkulExportMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_cbMatkulExportMouseClicked
-        // TODO add your handling code here:
-    }//GEN-LAST:event_cbMatkulExportMouseClicked
-
-    private void cbPokokBahasanExportActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbPokokBahasanExportActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_cbPokokBahasanExportActionPerformed
-    
-    
-    private void btnGenerateSoalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGenerateSoalActionPerformed
-        // TODO add your handling code here:
-        //WriteToFile(soalExport);
-        
-        if (listSoal.isEmpty() == true) {
-            JOptionPane.showMessageDialog(this, "Tidak ada data!","Peringatan", JOptionPane.WARNING_MESSAGE);
-        } else {
-            model.setRowCount(0);
-            Object cbMatkulTerpilih =  cbMatkulGenerate.getSelectedItem();
-            Object cbPokokBahasanTerpilih =  cbPokokBahasanGenerate.getSelectedItem();
-            String strcbMatkulTerpilih = cbMatkulTerpilih.toString();
-            String strcbPokokBahasanTerpilih = cbPokokBahasanTerpilih.toString();
-            
-            int no = 1;
-            for (int j = 0; j < listSoal.size(); j++) {
-                String nomor = String.valueOf(no);
-                if (strcbMatkulTerpilih.equals(listSoal.get(j).getMatkul()) 
-                        && listSoal.get(j).getPokbas().equals(strcbPokokBahasanTerpilih) ) {
-                    soalExport = new LinkedList<Pertanyaan>();
-                    soalExport.add(new Pertanyaan(listSoal.get(j).getMatkul(), listSoal.get(j).getPokbas(),
-                    listSoal.get(j).getPertanyaan(),
-                    listSoal.get(j).getJawabanA(), listSoal.get(j).isA(),
-                    listSoal.get(j).getJawabanB(), listSoal.get(j).isB(),
-                    listSoal.get(j).getJawabanC(), listSoal.get(j).isC(),
-                    listSoal.get(j).getJawabanD(), listSoal.get(j).isD(),
-                    listSoal.get(j).getJawabanE(), listSoal.get(j).isE()));
-                }
-                    
-            }
-            
-                    Collections.shuffle(soalExport);
-                    controlmodel = 2;
-                    int jumlah = Integer.parseInt(jTextFieldGenerateJumlahSoal.getText());
-                    System.out.println(jumlah);
-                    for (int n = 0; n < soalExport.size(); n++) {
-                        String nomorr = String.valueOf(no);
-                        String [] isibariss = {nomorr, soalExport.get(n).getMatkul(), soalExport.get(n).getPokbas(),
-                        soalExport.get(n).getPertanyaan(),
-                        soalExport.get(n).getJawabanD(), String.valueOf(soalExport.get(n).isD()),
-                        soalExport.get(n).getJawabanC(), String.valueOf(soalExport.get(n).isC()),
-                        soalExport.get(n).getJawabanB(), String.valueOf(soalExport.get(n).isB()),
-                        soalExport.get(n).getJawabanA(), String.valueOf(soalExport.get(n).isA()),
-                        soalExport.get(n).getJawabanE(), String.valueOf(soalExport.get(n).isE())};
-                        model.addRow(isibariss);
-                        System.out.println("jumlah row = "+jTableGenerate.getRowCount());
-                        System.out.println("jumlah ukuran soalExport = "+soalExport.size());
-                        if (jTableGenerate.getRowCount() == soalExport.size()) {
-                            int tampil = soalExport.size() - jumlah;
-                            for (int k = 0; k < tampil; k++) {
-                                 model.removeRow(k);
-                            }
-                        }
-                        
-                        control = new int[jTableGenerate.getRowCount()];
-                        control[n] = n;
-                        no++;
-                    }
-            
-            
-        }
-        
-    }//GEN-LAST:event_btnGenerateSoalActionPerformed
-
-    private void btnDMKHapus1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDMKHapus1ActionPerformed
+    private void btnSimpanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSimpanActionPerformed
         // TODO add your handling code here:
         Object cbMatkulTerpilih =  cbMatkul.getSelectedItem();
-        String strcbMatkulTerpilih = cbMatkulTerpilih.toString();
-        
-        lblMataKuliah.setText(strcbMatkulTerpilih);
-        
-    }//GEN-LAST:event_btnDMKHapus1ActionPerformed
+        Object cbPokokBahasanTerpilih =  cbPokokBahasan.getSelectedItem();
+        if (cbMatkulTerpilih == null || cbPokokBahasanTerpilih == null) {
+            JOptionPane.showMessageDialog(this, "Anda belum memilih Mata Kuliah atau Pokok Bahasan");
+            cbMatkul.requestFocus(true);
+        } else {
+            String strcbMatkulTerpilih = cbMatkulTerpilih.toString();
+            String strcbPokokBahasanTerpilih = cbPokokBahasanTerpilih.toString();
+
+            listSoal.add(new Pertanyaan(strcbMatkulTerpilih, strcbPokokBahasanTerpilih,
+                jTextAreaSoal.getText(),
+                jTextAreaJawabanA.getText(), jRadioButtonJawabanA.isSelected(),
+                jTextAreaJawabanB.getText(), jRadioButtonJawabanB.isSelected(),
+                jTextAreaJawabanC.getText(), jRadioButtonJawabanC.isSelected(),
+                jTextAreaJawabanD.getText(), jRadioButtonJawabanD.isSelected(),
+                jTextAreaJawabanE.getText(), jRadioButtonJawabanE.isSelected()));
+
+        //refreshCBDaftarSoal();
+        //refreshCBGenerate();
+        refreshCBAll();
+
+        JOptionPane.showMessageDialog(this, "Soal ke "+ (i+1) +" berhasil ditambahkan!"
+            + "\nSilahkan mengisi soal berikutnya.");
+        i++;
+        //lblNomorSoal.setText(""+(i+1));
+        jTextAreaSoal.setText("");
+        jTextAreaJawabanA.setText("");
+        jTextAreaJawabanB.setText("");
+        jTextAreaJawabanC.setText("");
+        jTextAreaJawabanD.setText("");
+        jTextAreaJawabanE.setText("");
+        jRadioButtonJawabanA.setSelected(false);
+        jRadioButtonJawabanB.setSelected(false);
+        jRadioButtonJawabanC.setSelected(false);
+        jRadioButtonJawabanD.setSelected(false);
+        jRadioButtonJawabanE.setSelected(false);
+
+        }
+
+        //String listSoal = strcbMatkulTerpilih+strcbPokokBahasanTerpilih;
+        //listSoal.add(strcbMatkulTerpilih,strcbPokokBahasanTerpilih,jTextAreaSoal.getText());
+        /*Pertanyaan a = new Pertanyaan("Najib",true,true, false, false, false);
+
+        a.getPertanyaan();
+        LinkedList soal = new LinkedList();
+        soal.add(a.getPertanyaan());*/
+        /*
+        System.out.println(
+            listSoal.get(index).matkul + "\n" + listSoal.get(index).pokbas
+            +listSoal.get(index).pertanyaan +"\n"
+            + listSoal.get(index).jawabanA+" = " + listSoal.get(index).isA() + "\n"
+            + listSoal.get(index).jawabanB+" = " + listSoal.get(index).isB() + "\n"
+            + listSoal.get(index).jawabanC+" = " + listSoal.get(index).isC() + "\n"
+            + listSoal.get(index).jawabanD+" = " + listSoal.get(index).isD() + "\n"
+            + listSoal.get(index).jawabanE+" = " + listSoal.get(index).isE() + "\n"
+        );
+        */
+
+    }//GEN-LAST:event_btnSimpanActionPerformed
 
     private void btnDPBHapus1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDPBHapus1ActionPerformed
         // TODO add your handling code here:
@@ -1678,102 +1659,130 @@ public class Home extends javax.swing.JFrame {
         String strcbPokokBahasanTerpilih = cbPokokBahasanTerpilih.toString();
         lblPokokBahasan.setText(strcbPokokBahasanTerpilih);
     }//GEN-LAST:event_btnDPBHapus1ActionPerformed
-    JFileChooser chooser = new JFileChooser();
-    int result;
-    private void btnGenerateSoalExportActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGenerateSoalExportActionPerformed
-        // TODO add your handling code here:
-        String file_name = title+" - Export.txt";
-        File selectedFile = null;
-        try {   /*
-                jFileChooserGenerate.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
-                result = jFileChooserGenerate.showOpenDialog(this);
-                if ( result == JFileChooser.APPROVE_OPTION) {
-                    selectedFile = chooser.getSelectedFile();
-                            
-                    jLabelLokasiFile.setText("File akan disimpan di" + ((selectedFile!=null)?
-                                      chooser.getSelectedFile().getAbsolutePath():"nothing"));
-                } else {
-                    jLabelLokasiFile.setText("Location to save file :");
-               }
-            */
-                
-                FileWriter fstream = new FileWriter(file_name);
-                BufferedWriter out = new BufferedWriter(fstream);
-                for (int j = 0; j < soalExport.size(); j++) {
-                    String isibaris = listSoal.get(j).getMatkul() +","+ listSoal.get(j).getPokbas()+","+
-                    listSoal.get(j).getPertanyaan()+","+
-                    listSoal.get(j).getJawabanA()+","+ String.valueOf(listSoal.get(j).isA())+","+
-                    listSoal.get(j).getJawabanB()+","+ String.valueOf(listSoal.get(j).isB())+","+
-                    listSoal.get(j).getJawabanC()+","+ String.valueOf(listSoal.get(j).isC())+","+
-                    listSoal.get(j).getJawabanD()+","+ String.valueOf(listSoal.get(j).isD())+","+
-                    listSoal.get(j).getJawabanE()+","+ String.valueOf(listSoal.get(j).isE());
-                    out.write(isibaris);              
-                }
-                out.close();
-                //System.out.println("File created successfully.");
-                jLabelLokasiFile.setText("File berhasil di simpan di folder Project Netbeans");
-                JOptionPane.showMessageDialog(this, "File telah berhasil disimpan!","Sukses!", JOptionPane.INFORMATION_MESSAGE);
 
-        } catch (Exception e) {
-            JOptionPane.showMessageDialog(this, "File gagal disimpan!","Gagal!", JOptionPane.ERROR_MESSAGE);
-        }
-        
-    }//GEN-LAST:event_btnGenerateSoalExportActionPerformed
-
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    private void btnDMKHapus1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDMKHapus1ActionPerformed
         // TODO add your handling code here:
-        jFrameDetailSoal.dispose();
-    }//GEN-LAST:event_jButton1ActionPerformed
+        Object cbMatkulTerpilih =  cbMatkul.getSelectedItem();
+        String strcbMatkulTerpilih = cbMatkulTerpilih.toString();
 
-    private void jTextFieldDetailSoalMataKuliahActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextFieldDetailSoalMataKuliahActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jTextFieldDetailSoalMataKuliahActionPerformed
+        lblMataKuliah.setText(strcbMatkulTerpilih);
 
-    private void btnGenerateTampilkanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGenerateTampilkanActionPerformed
+    }//GEN-LAST:event_btnDMKHapus1ActionPerformed
+
+    private void btnDPBHapusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDPBHapusActionPerformed
         // TODO add your handling code here:
-        if (listSoal.isEmpty() == true) {
+        if (daftarPokokBahasan.isEmpty() == true) {
             JOptionPane.showMessageDialog(this, "Tidak ada data!","Peringatan", JOptionPane.WARNING_MESSAGE);
         } else {
-            controlmodel = 1;
-            model.setRowCount(0);
-            Object cbMatkulTerpilih =  cbMatkulGenerate.getSelectedItem();
-            Object cbPokokBahasanTerpilih =  cbPokokBahasanGenerate.getSelectedItem();
-            String strcbMatkulTerpilih = cbMatkulTerpilih.toString();
-            String strcbPokokBahasanTerpilih = cbPokokBahasanTerpilih.toString();
-            
-            int no = 1;
-            for (int j = 0; j < listSoal.size(); j++) {
-                String nomor = String.valueOf(no);
-                String [] isibaris = {nomor, listSoal.get(j).getMatkul(), listSoal.get(j).getPokbas(),
-                    listSoal.get(j).getPertanyaan(),
-                    listSoal.get(j).getJawabanA(), String.valueOf(listSoal.get(j).isA()),
-                    listSoal.get(j).getJawabanB(), String.valueOf(listSoal.get(j).isB()),
-                    listSoal.get(j).getJawabanC(), String.valueOf(listSoal.get(j).isC()),
-                    listSoal.get(j).getJawabanD(), String.valueOf(listSoal.get(j).isD()),
-                    listSoal.get(j).getJawabanE(), String.valueOf(listSoal.get(j).isE())};
-                if (listSoal.get(j).getMatkul() == strcbMatkulTerpilih 
-                        && listSoal.get(j).getPokbas() == strcbPokokBahasanTerpilih ) {
-                    model.addRow(isibaris);
-                    for (int k = 0; k < jTableGenerate.getRowCount(); k++) {
-                        control = new int[jTableGenerate.getRowCount()];
-                        control[k] = j;
-                    }
-                    no++;
-                    
-                    soalExport = new LinkedList<Pertanyaan>();
-                    soalExport.add(new Pertanyaan(listSoal.get(j).getMatkul(), listSoal.get(j).getPokbas(),
-                    listSoal.get(j).getPertanyaan(),
-                    listSoal.get(j).getJawabanA(), listSoal.get(j).isA(),
-                    listSoal.get(j).getJawabanB(), listSoal.get(j).isB(),
-                    listSoal.get(j).getJawabanC(), listSoal.get(j).isC(),
-                    listSoal.get(j).getJawabanD(), listSoal.get(j).isD(),
-                    listSoal.get(j).getJawabanE(), listSoal.get(j).isE()));
+            Object cbterpilih =  cbPokokBahasan.getSelectedItem();
+            String strcbterpilih = cbterpilih.toString();
+
+            int dialogButton = JOptionPane.YES_NO_OPTION;
+            int dialogResult = JOptionPane.showConfirmDialog(this,
+                "Anda yakin ingin menghapus "+strcbterpilih+"?", "Hapus Item",
+                dialogButton, JOptionPane.WARNING_MESSAGE);
+            JOptionPane pesan = new JOptionPane();
+            if(dialogResult == 0) {
+                //System.out.println("Yes option");
+                int lokasiitem = daftarPokokBahasan.indexOf(strcbterpilih);
+                cbPokokBahasan.removeItem(daftarPokokBahasan.get(lokasiitem));
+                try {
+                    daftarPokokBahasan.remove(strcbterpilih);
+                } catch (IndexOutOfBoundsException e) {
+                    pesan.showMessageDialog(this, "Tidak ada data!","Peringatan", JOptionPane.WARNING_MESSAGE);
                 }
+
+                pesan.showMessageDialog(this, "Pokok Bahasan berhasil dihapus!");
+            } else {
+                pesan.hide();
             }
-            
-            
         }
-    }//GEN-LAST:event_btnGenerateTampilkanActionPerformed
+    }//GEN-LAST:event_btnDPBHapusActionPerformed
+
+    private void btnDPBTambahActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDPBTambahActionPerformed
+        // TODO add your handling code here:
+        btnOKhandler = 2;
+        jDialogMKPB.setLocationRelativeTo(this);
+        jDialogMKPB.setTitle("Tambah Pokok Bahasan");
+        lblMKPB.setText("Masukkan Nama Pokok Bahasan");
+        jDialogMKPB.setVisible(true);
+    }//GEN-LAST:event_btnDPBTambahActionPerformed
+
+    private void btnDMKTambahActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDMKTambahActionPerformed
+        // TODO add your handling code here:
+        btnOKhandler = 1;
+        jDialogMKPB.setLocationRelativeTo(this);
+        jDialogMKPB.setTitle("Tambah Mata Kuliah");
+        lblMKPB.setText("Masukkan Nama Mata Kuliah");
+        jDialogMKPB.setVisible(true);
+    }//GEN-LAST:event_btnDMKTambahActionPerformed
+
+    private void btnDMKHapusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDMKHapusActionPerformed
+        // TODO add your handling code here:
+        if (daftarMatkul.isEmpty() == true) {
+            JOptionPane.showMessageDialog(this, "Tidak ada data!","Peringatan", JOptionPane.WARNING_MESSAGE);
+        } else {
+            Object cbterpilih =  cbMatkul.getSelectedItem();
+            String strcbterpilih = cbterpilih.toString();
+
+            int dialogButton = JOptionPane.YES_NO_OPTION;
+            int dialogResult = JOptionPane.showConfirmDialog(this,
+                "Anda yakin ingin menghapus "+strcbterpilih+"?", "Hapus Item",
+                dialogButton, JOptionPane.WARNING_MESSAGE);
+            JOptionPane pesan = new JOptionPane();
+            if(dialogResult == 0) {
+                //System.out.println("Yes option");
+                int lokasiitem = daftarMatkul.indexOf(strcbterpilih);
+                cbMatkul.removeItem(daftarMatkul.get(lokasiitem));
+                try {
+                    daftarMatkul.remove(strcbterpilih);
+                } catch (IndexOutOfBoundsException e) {
+                    pesan.showMessageDialog(this, "Tidak ada data!","Peringatan", JOptionPane.WARNING_MESSAGE);
+                }
+
+                pesan.showMessageDialog(this, "Mata Kuliah berhasil dihapus!");
+            } else {
+                pesan.hide();
+            }
+        }
+    }//GEN-LAST:event_btnDMKHapusActionPerformed
+
+    private void cbMatkulActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbMatkulActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_cbMatkulActionPerformed
+
+    private void cbMatkulMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_cbMatkulMouseClicked
+        // TODO add your handling code here:
+        /*
+        Object cbterpilih =  cbMatkul.getSelectedItem();
+        String strcbterpilih = cbterpilih.toString();
+        String namaPokBas = "namaList"+strcbterpilih;
+
+        LinkedList namaListPokBas = new LinkedList();
+        cbPokokBahasan.removeAllItems();
+        for (int i = 0; i < namaListPokBas.size(); i++) {
+            cbPokokBahasan.addItem(namaListPokBas.get(i));
+        }
+        */
+    }//GEN-LAST:event_cbMatkulMouseClicked
+
+    private void formWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosing
+        // TODO add your handling code here:
+        
+    }//GEN-LAST:event_formWindowClosing
+
+    private void jmiHelpTentangActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmiHelpTentangActionPerformed
+        // TODO add your handling code here:
+        jDialogCredit.setTitle("Credits");
+        jDialogCredit.setLocationRelativeTo(null);
+        jDialogCredit.show();
+        
+    }//GEN-LAST:event_jmiHelpTentangActionPerformed
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        // TODO add your handling code here:
+        jDialogCredit.hide();
+    }//GEN-LAST:event_jButton2ActionPerformed
     
     /**
      * @param args the command line arguments
@@ -1818,7 +1827,6 @@ public class Home extends javax.swing.JFrame {
     private javax.swing.JButton btnDPBHapus1;
     private javax.swing.JButton btnDPBTambah;
     private javax.swing.JButton btnEdit;
-    private javax.swing.JButton btnExport;
     private javax.swing.JButton btnGenerateSoal;
     private javax.swing.JButton btnGenerateSoalExport;
     private javax.swing.JButton btnGenerateTampilkan;
@@ -1835,13 +1843,13 @@ public class Home extends javax.swing.JFrame {
     private javax.swing.JComboBox cbMatkul;
     private javax.swing.JComboBox cbMatkulDaftarSoalMatkul;
     private javax.swing.JComboBox cbMatkulDaftarSoalMatkul1;
-    private javax.swing.JComboBox cbMatkulExport;
     private javax.swing.JComboBox cbMatkulGenerate;
     private javax.swing.JComboBox cbPokokBahasan;
     private javax.swing.JComboBox cbPokokBahasanDaftarSoalPokBas;
-    private javax.swing.JComboBox cbPokokBahasanExport;
     private javax.swing.JComboBox cbPokokBahasanGenerate;
     private javax.swing.JButton jButton1;
+    private javax.swing.JButton jButton2;
+    private javax.swing.JDialog jDialogCredit;
     private javax.swing.JDialog jDialogMKPB;
     private javax.swing.JFileChooser jFileChooserGenerate;
     private javax.swing.JFrame jFrameDetailSoal;
@@ -1851,14 +1859,15 @@ public class Home extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel8;
+    private javax.swing.JLabel jLabel9;
     private javax.swing.JLabel jLabelA;
     private javax.swing.JLabel jLabelB;
     private javax.swing.JLabel jLabelC;
     private javax.swing.JLabel jLabelD;
     private javax.swing.JLabel jLabelE;
-    private javax.swing.JLabel jLabelLokasiFile;
     private javax.swing.JMenuBar jMenuBar1;
-    private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanelBuatSoal;
     private javax.swing.JPanel jPanelDaftarMatkul;
@@ -1868,7 +1877,6 @@ public class Home extends javax.swing.JFrame {
     private javax.swing.JPanel jPanelGenerateSoal;
     private javax.swing.JPanel jPanelMatkulPokokBahasan;
     private javax.swing.JPanel jPanelPertanyaan;
-    private javax.swing.JPanel jPanelPilihDaftarMatkul1;
     private javax.swing.JPanel jPanelPilihan;
     private javax.swing.JRadioButton jRadioButtonJawabanA;
     private javax.swing.JRadioButton jRadioButtonJawabanB;
@@ -1899,28 +1907,23 @@ public class Home extends javax.swing.JFrame {
     private javax.swing.JTextField jTextFieldDetailSoalMataKuliah;
     private javax.swing.JTextField jTextFieldDetailSoalPokokBahasan;
     private javax.swing.JTextField jTextFieldGenerateJumlahSoal;
-    private javax.swing.JMenu jmEdit;
     private javax.swing.JMenu jmFile;
     private javax.swing.JMenu jmHelp;
-    private javax.swing.JMenuItem jmiFileBaru;
     private javax.swing.JMenuItem jmiFileBuka;
     private javax.swing.JMenuItem jmiFileKeluar;
     private javax.swing.JMenuItem jmiFileSimpan;
     private javax.swing.JMenuItem jmiHelpTentang;
-    private javax.swing.JMenuItem jmiHelpUserGuide;
     private javax.swing.JLabel lblDaftarMatkul;
-    private javax.swing.JLabel lblDaftarMatkulGenerate1;
     private javax.swing.JLabel lblDaftarPokokBahasan;
-    private javax.swing.JLabel lblDaftarPokokBahasanGenerate1;
-    private javax.swing.JLabel lblJumlahSoalGenerate1;
     private javax.swing.JLabel lblMKPB;
     private javax.swing.JLabel lblMataKuliah;
     private javax.swing.JLabel lblMataKuliah1;
     private javax.swing.JLabel lblPokokBahasan;
     private javax.swing.JLabel lblPokokBahasan1;
-    private javax.swing.JTextField tfJumlahSoalExport;
     private javax.swing.JTextField tfMKPB;
     // End of variables declaration//GEN-END:variables
+    
+    
     
     DefaultTableModel model;
     int[] control;
@@ -2006,14 +2009,14 @@ public class Home extends javax.swing.JFrame {
                       jTextAreaDetailSoalJawaban.setText("Tidak ada jawaban untuk soal ini");
                   } else {
                     jTextAreaDetailSoalJawaban.setText(
-                            listSoal.get(control[row]).getJawabanA()+"\t\t"+listSoal.get(control[row]).isA()+"\n"+
-                            listSoal.get(control[row]).getJawabanB()+"\t\t"+listSoal.get(control[row]).isB()+"\n"+
-                            listSoal.get(control[row]).getJawabanC()+"\t\t"+listSoal.get(control[row]).isC()+"\n"+
-                            listSoal.get(control[row]).getJawabanD()+"\t\t"+listSoal.get(control[row]).isD()+"\n"+
-                            listSoal.get(control[row]).getJawabanE()+"\t\t"+listSoal.get(control[row]).isE()
+                            "A. "+listSoal.get(control[row]).isA()+"\n"+listSoal.get(control[row]).getJawabanA()+"\n"+
+                              "B. "+listSoal.get(control[row]).isB()+"\n"+listSoal.get(control[row]).getJawabanB()+"\n"+
+                              "C. "+listSoal.get(control[row]).isC()+"\n"+listSoal.get(control[row]).getJawabanC()+"\n"+
+                              "D. "+listSoal.get(control[row]).isD()+"\n"+listSoal.get(control[row]).getJawabanD()+"\n"+
+                              "E. "+listSoal.get(control[row]).isE()+"\n"+listSoal.get(control[row]).getJawabanE()+"\n"
                     );
                   }
-                       
+            //jFrameDetailSoal.setTitle("Detail Soal");           
             jFrameDetailSoal.setLocationRelativeTo(null);
             jFrameDetailSoal.show();
              
@@ -2120,6 +2123,43 @@ public class Home extends javax.swing.JFrame {
         cbPokokBahasanGenerate.removeAllItems(); //hapus List yg sudah ada
         */
     }
+
+    
+    private void refreshCBAll() {
+        cbMatkul.removeAllItems(); //hapus List yg sudah ada
+        cbPokokBahasan.removeAllItems(); //hapus List yg sudah ada
+        cbMatkulGenerate.removeAllItems(); //hapus List yg sudah ada
+        cbPokokBahasanGenerate.removeAllItems(); //hapus List yg sudah ada
+        cbMatkulDaftarSoalMatkul1.removeAllItems();
+        cbMatkulDaftarSoalMatkul.removeAllItems();
+        cbPokokBahasanDaftarSoalPokBas.removeAllItems();
+        int sizeMatkul = 0;
+        while (sizeMatkul < daftarMatkul.size()) {
+            cbMatkul.addItem(daftarMatkul.get(sizeMatkul));
+            cbMatkulGenerate.addItem(daftarMatkul.get(sizeMatkul));
+            cbMatkulDaftarSoalMatkul.addItem(daftarMatkul.get(sizeMatkul));
+            cbMatkulDaftarSoalMatkul1.addItem(daftarMatkul.get(sizeMatkul));
+            sizeMatkul++;
+        }
+        int sizePokBas = 0;
+        while (sizePokBas < daftarPokokBahasan.size()) {
+            cbPokokBahasan.addItem(daftarPokokBahasan.get(sizePokBas));
+            cbPokokBahasanGenerate.addItem(daftarPokokBahasan.get(sizePokBas));
+            cbPokokBahasanDaftarSoalPokBas.addItem(daftarPokokBahasan.get(sizePokBas));
+            sizePokBas++;
+        }
+        
+        /*
+        for (int i = 0; i < daftarMatkul.size(); i++) {
+            cbMatkulGenerate.addItem(daftarMatkul.get(i));
+        }
+        for (int i = 0; i < daftarPokokBahasan.size(); i++) {
+            cbPokokBahasanGenerate.addItem(daftarPokokBahasan.get(i));
+        }
+        cbMatkulGenerate.removeAllItems(); //hapus List yg sudah ada
+        cbPokokBahasanGenerate.removeAllItems(); //hapus List yg sudah ada
+        */
+    }
     
     private void refreshCBGenerate() {
         cbMatkulGenerate.removeAllItems(); //hapus List yg sudah ada
@@ -2148,10 +2188,10 @@ public class Home extends javax.swing.JFrame {
     }
     String title;
     private void setJudulFrame() {
-        Awal obj = new Awal();
-        title = obj.getNamaProject();
+        //Awal obj = new Awal();
+        //title = obj.getNamaProject();
         String judulAplikasi = "BankSoal Portable 1.0";
-        this.setTitle(title + " - "+ judulAplikasi);
+        this.setTitle(judulAplikasi);
     }
     
     private static void WriteToFile(LinkedList<Pertanyaan> user){
@@ -2177,6 +2217,14 @@ public class Home extends javax.swing.JFrame {
         System.out.println(e);
       } 
       return o_userdata;
+    }
+    
+     private String searchOpenPath() {
+        jfc.addChoosableFileFilter(textfilter);
+        if (jfc.showOpenDialog(jf) == JFileChooser.APPROVE_OPTION) {
+            return jfc.getSelectedFile().getPath();
+        }
+        return "";
     }
 
     
